@@ -1,0 +1,27 @@
+---
+layout: default
+---
+[A-Z]
+<br>
+{% capture posts %}
+  {% for post in site.posts %}
+    |{{ post.title }}#{{ post.url | prepend: site.baseurl }}
+  {% endfor %}
+{% endcapture %}
+{% assign sortedposts = posts | split: '|' | sort %}
+{% for post in sortedposts %}
+    {% assign postitems = post | split: '#' %}
+    <a href={{ postitems[1] }}>{{ postitems[0] }}</a><br>
+{% endfor %}
+<p>[Date]</p>
+<div class="home">
+    <ul class="posts">
+        {% for post in site.posts %}
+        <li><span>{{ post.date | date: site.date_format }}</span><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+
+<p>
+<a class="subscribe-feed" href="http://tksongs.tk/feed.xml" data-ga-click="Dashboard, click, News feed atom/RSS link - context:user"><svg aria-hidden="true" class="octicon octicon-rss" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path d="M2 13H0v-2c1.11 0 2 .89 2 2zM0 3v1a9 9 0 0 1 9 9h1C10 7.48 5.52 3 0 3zm0 4v1c2.75 0 5 2.25 5 5h1c0-3.31-2.69-6-6-6z"></path></svg>XML feed</a>
+</p>
